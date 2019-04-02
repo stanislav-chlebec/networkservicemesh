@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-IPADDR=$(ifconfig eth1 | grep -i Mask | awk '{print $2}'| cut -f2 -d:)
+IPADDR=$(ifconfig enP2p1s0f1 | grep -i Mask | awk '{print $2}'| cut -f2 -d:)
 echo This VM has IP address "$IPADDR"
 
 echo Copying credentials out of vagrant
