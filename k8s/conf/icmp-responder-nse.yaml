@@ -6,27 +6,27 @@ spec:
     matchLabels:
       networkservicemesh.io/app: "icmp-responder"
       networkservicemesh.io/impl: "icmp-responder"
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
         networkservicemesh.io/app: "icmp-responder"
         networkservicemesh.io/impl: "icmp-responder"
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: networkservicemesh.io/app
-                    operator: In
-                    values:
-                      - icmp-responder
-                  - key: networkservicemesh.io/impl
-                    operator: In
-                    values:
-                      - icmp-responder
-              topologyKey: "kubernetes.io/hostname"
+#     affinity:
+#       podAntiAffinity:
+#         requiredDuringSchedulingIgnoredDuringExecution:
+#           - labelSelector:
+#               matchExpressions:
+#                 - key: networkservicemesh.io/app
+#                   operator: In
+#                   values:
+#                     - icmp-responder
+#                 - key: networkservicemesh.io/impl
+#                   operator: In
+#                   values:
+#                     - icmp-responder
+#             topologyKey: "kubernetes.io/hostname"
       containers:
         - name: icmp-responder-nse
           image: networkservicemesh/icmp-responder-nse:latest
