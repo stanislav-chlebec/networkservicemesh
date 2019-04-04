@@ -19,8 +19,8 @@ spec:
           image: networkservicemesh/vppagent-dataplane:latest
           imagePullPolicy: IfNotPresent
           env:
-            - name: RETAIN_SUPERVISOR
-              value: "y"
+#           - name: RETAIN_SUPERVISOR
+#             value: "y"
             - name: NSM_DATAPLANE_SRC_IP
               valueFrom:
                 fieldRef:
