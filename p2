@@ -1,0 +1,12 @@
+#!/bin/bash -x
+# shellcheck disable=SC2086
+
+SSH_OPTS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+kubeadm token create --print-join-command > ./join-cluster.sh
+chmod +x ./join-cluster.sh
+
+# Upload and run worker join script
+scp ${SSH_OPTS} ./join-cluster.sh stanislav@147.75.98.202:~/join-cluster.sh
+#ssh ${SSH_OPTS} stanislav@147.75.98.202 ~/join-cluster.sh &
+
+#wait

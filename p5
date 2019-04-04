@@ -1,0 +1,12 @@
+set -x
+masterIP=`kubectl get nodes -o wide --no-headers=true | grep master | awk '{print $6}'`
+notmasterIP=`kubectl get nodes -o wide --no-headers=true | grep -v master | awk '{print $6}'`
+nsmvppagentcontainer1=`kubectl get pods -o wide --no-headers=true --include-uninitialized  | grep $masterIP | awk '{print $1}' | grep 'nsm-vppagent-dataplane'`
+nsmvppagentcontainer2=`kubectl get pods -o wide --no-headers=true --include-uninitialized  | grep $notmasterIP | awk '{print $1}' | grep 'nsm-vppagent-dataplane'`
+
+kubectl logs $nsmvppagentcontainer1
+kubectl logs $nsmvppagentcontainer2
+
+kubectl exec  $nsmvppagentcontainer1 -- /usr/bin/vppctl show int address
+kubectl exec  $nsmvppagentcontainer2 -- /usr/bin/vppctl show int address
+
